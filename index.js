@@ -1,23 +1,25 @@
 const WebSocket = require("ws");
 const express = require("express");
-const app = express()
+const app = express();
 const path = require("path");
 
-app.use("/", express.static(path.resolve(__dirname, "../client")))
+app.use("/chat", express.static(path.resolve(__dirname, "../client/index.html")))
 
 // http server using node express
-const testServer = app.listen(3000)
+const testServer = app.listen(5000);
 
 // websocket server
 const wsServer = new WebSocket.Server({
     noServer: true
-})
+});
 
 // on connection do ...
 wsServer.on("connection", (ws) => {
+
     // on message event do ...
     ws.on("message", (msg) => {
         wsServer.clients.forEach(function each(client) {
+
             // if client is ready then ...
             if (client.readyState === WebSocket.OPEN) {
                 client.send(msg.toString());

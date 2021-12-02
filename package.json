@@ -1,14 +1,14 @@
 {
   "name": "ws_test",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple chat app to test websockets random configs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dimitri Dias Moreira",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",

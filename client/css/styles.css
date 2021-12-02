@@ -1,0 +1,37 @@
+input#message {
+    padding: 14px 20px;
+    margin: 4px 2px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: small;
+}
+
+button#send:enabled {
+    border: 2px solid #008CBA;
+    border-radius: 12px;
+    background-color: darkcyan;
+    color: white;
+    padding: 14px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: small;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+button#send:enabled:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+button#send:disabled {
+    padding: 14px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: small;
+    margin: 4px 2px;
+}

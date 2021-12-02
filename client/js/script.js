@@ -1,38 +1,42 @@
-// WebSocket var
-const url = "ws://localhost:3000/WebSocketTest"
-const wsServerTest = new WebSocket(url)
+// WebSocket var -- wss when from https
+const url = "ws://localhost:5000/chat"; // change ws to wss when using https
+const socket = new WebSocket(url, ["soap", "wamp"]);
 
 // DOM elements
-const messages = document.getElementById("messages")
-const msgInput = document.getElementById("message")
-const sendButton = document.getElementById("send")
+const messages = document.getElementById("messages");
+const msgInput = document.getElementById("message");
+const sendButton = document.getElementById("send");
 
-sendButton.disabled = true
-sendButton.addEventListener("click", sendMsg, false)
+sendButton.disabled = true;
+sendButton.addEventListener("click", () => sendMsg(), false);
 
 // client send msg
 function sendMsg() {
-    const text = msgInput.value
-    msgGeneration(text, "Client")
-    wsServerTest.send(text)
+    const text = msgInput.value;
+    msgGeneration(text, "Client");
+    socket.send(text);
 }
 
 
 // elements to show received messages in the browser
 function msgGeneration(msg, from) {
-    const Message = document.createElement("h4")
-    Message.innerText = `${from} says: ${msg}`
-    messages.appendChild(Message)
+    const Message = document.createElement("h5");
+    Message.innerText = `${from} says: ${msg}`;
+    messages.appendChild(Message);
 }
 
 // changing state of sendButton
-wsServerTest.onopen = function() {
-    sendButton.disabled = false
-    console.log('WebSocket Client Connected');
+socket.onopen = function(event) {
+    sendButton.disabled = false;
+    console.log("WebSocket connection established");
 }
 
 // msg event handler
-wsServerTest.onmessage = function(event) {
-    const { data } = event
+socket.onmessage = function(event) {
+    const { data } = event;
     msgGeneration(data, "Server")
 }
+
+socket.onerror = function(error) {
+    console.error(`[error] ${error.message}`);
+  };
